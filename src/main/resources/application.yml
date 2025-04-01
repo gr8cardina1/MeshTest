@@ -1,0 +1,36 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /
+
+openapi.base-path: /
+
+spring:
+  application:
+    name: mesh-task
+  datasource:
+    url: jdbc:postgresql://localhost:5432/meshtask
+    username: postgres
+    password: 31Jul1975
+    driver-class-name: org.postgresql.Driver
+#    hikari:
+#      schema: meshtask
+  jpa:
+    generate-ddl: true
+    dialect:
+    properties:
+      hibernate:
+        ddl-auto: create-drop #create-drop #none
+        identifier_quote_style: QUOTE
+
+hibernate:
+  show-sql: true
+  transaction:
+    jta:
+      platform:
+
+logging:
+  level:
+    root: INFO
+    com.meshgroup.meshtask: INFO
+

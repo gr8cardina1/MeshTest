@@ -1,0 +1,91 @@
+openapi: 3.0.4
+info:
+  title: Mesh Task Account
+  contact:
+    email: roman@kamalium.com
+  version: 0.0.1
+servers:
+  - url: /
+tags:
+  - name: user
+    description: User
+paths:
+  /user/generate_jwt:
+    post:
+      tags:
+        - user
+      operationId: userGenerateJwt
+      requestBody:
+        $ref: '#/components/requestBodies/UserTokenRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserTokenResponse'
+  /user/add:
+    get:
+      tags:
+        - user
+      operationId: addUser
+      requestBody:
+        $ref: '#/components/requestBodies/UserRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserResponse'
+components:
+  requestBodies:
+    UserTokenRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserTokenRequestSchema'
+    UserRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserRequestSchema'
+  responses:
+    UserTokenResponse:
+      description: Response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserTokenResponseSchema'
+    UserResponse:
+      description: Response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserResponseSchema'
+  schemas:
+    UserTokenRequestSchema:
+      type: object
+      required:
+        - userId
+      properties:
+        userId:
+          type: integer
+          format: int64
+    UserTokenResponseSchema:
+      type: object
+      required:
+        - token
+      properties:
+        token:
+          type: string
+    UserRequestSchema:
+      type: object
+      required:
+        - userId
+      properties:
+        userId:
+          type: integer
+          format: int64
+    UserResponseSchema:
+      type: object
+      required:
+        - userId
+      properties:
+        userId:
+          type: integer
+          format: int64
