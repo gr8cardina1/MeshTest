@@ -7,57 +7,144 @@ info:
 servers:
   - url: /
 tags:
-  - name: user
-    description: User
+  - name: User
+    description: User Operations
+  - name:  Account
+    description: Account Operations
 paths:
   /user/generate_jwt:
     post:
       tags:
-        - user
+        - User
       operationId: userGenerateJwt
       requestBody:
         $ref: '#/components/requestBodies/UserTokenRequest'
       responses:
         '200':
           $ref: '#/components/responses/UserTokenResponse'
-  /user/add:
-    get:
+
+  /account/addbalance:
+    post:
       tags:
-        - user
-      operationId: addUser
+        - Account
+      operationId: accountAddBalance
       requestBody:
-        $ref: '#/components/requestBodies/UserRequest'
+        $ref: '#/components/requestBodies/AccountAddBalanceRequest'
       responses:
         '200':
-          $ref: '#/components/responses/UserResponse'
+          $ref: '#/components/responses/AccountAddBalanceResponse'
+
+  /account/transfer:
+    post:
+      tags:
+        - Account
+      operationId: accountTransfer
+      requestBody:
+        $ref: '#/components/requestBodies/AccountTransferRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccountTransferResponse'
+
+
 components:
   requestBodies:
+    AccountTransferRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AccountTransferRequestSchema'
+    AccountAddBalanceRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AccountAddBalanceRequestSchema'
     UserTokenRequest:
       required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/UserTokenRequestSchema'
-    UserRequest:
-      required: true
+
+
+  responses:
+    AccountTransferResponse:
+      description: Response
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/UserRequestSchema'
-  responses:
+            $ref: '#/components/schemas/AccountTransferResponseSchema'
+    AccountAddBalanceResponse:
+      description: Response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AccountAddBalanceResponseSchema'
     UserTokenResponse:
       description: Response
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/UserTokenResponseSchema'
-    UserResponse:
-      description: Response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UserResponseSchema'
+
+
   schemas:
+    AccountAddBalanceRequestSchema:
+      type: object
+      required:
+        - id
+        - balance
+      properties:
+        id:
+          type: integer
+          format: int64
+        balance:
+          type: number
+          format: double
+
+    AccountAddBalanceResponseSchema:
+      type: object
+      required:
+        - id
+        - userId
+        - balance
+      properties:
+        id:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+        balance:
+          type: number
+          format: double
+
+    AccountTransferRequestSchema:
+      type: object
+      required:
+        - srcId
+        - dstId
+        - amount
+      properties:
+        srcId:
+          type: integer
+          format: int64
+        dstId:
+          type: integer
+          format: int64
+        amount:
+          type: number
+          format: double
+
+    AccountTransferResponseSchema:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+
     UserTokenRequestSchema:
       type: object
       required:
@@ -66,6 +153,7 @@ components:
         userId:
           type: integer
           format: int64
+
     UserTokenResponseSchema:
       type: object
       required:
@@ -73,19 +161,4 @@ components:
       properties:
         token:
           type: string
-    UserRequestSchema:
-      type: object
-      required:
-        - userId
-      properties:
-        userId:
-          type: integer
-          format: int64
-    UserResponseSchema:
-      type: object
-      required:
-        - userId
-      properties:
-        userId:
-          type: integer
-          format: int64
+

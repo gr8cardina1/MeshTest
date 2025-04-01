@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 
 import static com.meshgroup.meshtask.exception.messages.ValidationExceptionMessages.EV_AmountIsTooBig;
@@ -22,7 +21,7 @@ public class AccountDaoAdapter {
         return accountRepository.save(
                 AccountDao.builder()
                         .userId(userId)
-                        .balance(BigDecimal.valueOf(0))
+                        .balance(0)
                         .build()
         );
     }
@@ -30,21 +29,17 @@ public class AccountDaoAdapter {
     public AccountDao addBalance(Long id, double balance) {
         Optional<AccountDao> accountDao = accountRepository.findById(id);
         if (!accountDao.isEmpty())
-            accountDao.get().setBalance(
-                    accountDao.get().getBalance().add(BigDecimal.valueOf(balance))
-            );
+            accountDao.get().setBalance(accountDao.get().getBalance() + balance);
         return accountRepository.save(accountDao.get());
     }
 
     public AccountDao subtractBalance(Long id, double balance) {
         Optional<AccountDao> accountDao = accountRepository.findById(id);
         if (!accountDao.isEmpty()) {
-            if (accountDao.get().getBalance().subtract(BigDecimal.valueOf(balance)).doubleValue() < 0) {
+            if (accountDao.get().getBalance() - balance < 0) {
                 throw new BalanceLessThanZeroException(EV_AmountIsTooBig);
             }
-            accountDao.get().setBalance(
-                    accountDao.get().getBalance().subtract(BigDecimal.valueOf(balance))
-            );
+            accountDao.get().setBalance(accountDao.get().getBalance() - balance);
             return accountRepository.save(accountDao.get());
         }
         return null;

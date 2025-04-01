@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.math.BigDecimal;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,5 +22,5 @@ public class AccountDao {
     Long userId;
 
     @Column(name = "BALANCE",columnDefinition = "decimal(30,2)")
-    BigDecimal balance;
+    double balance;
 }

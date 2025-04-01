@@ -8,12 +8,10 @@ import com.meshgroup.meshtask.model.dao.AccountDao;
 import com.meshgroup.meshtask.model.dao.EmailDataDao;
 import com.meshgroup.meshtask.model.dao.PhoneDataDao;
 import com.meshgroup.meshtask.model.dao.UserDao;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.Random;
 
 @Slf4j
@@ -34,7 +32,7 @@ public class CreateUsersWithData {
         return userRepository.save(user).getId();
     }
 
-    private void createAccount(long userId, BigDecimal balance) {
+    private void createAccount(long userId, double balance) {
         var account = AccountDao.builder()
                 .userId(userId)
                 .balance(balance)
@@ -61,7 +59,7 @@ public class CreateUsersWithData {
     private void createRecord(String name,
                               String dateOfBirth,
                               String password,
-                              BigDecimal balance,
+                              double balance,
                               String emailAddress,
                               String phoneNumber) {
         long userId = createUser(name, dateOfBirth, password);
@@ -79,42 +77,42 @@ public class CreateUsersWithData {
         createRecord("user1",
                  "12.04.1984",
                   "password1",
-                            BigDecimal.valueOf(random.nextInt(10, 1000)),
+                            random.nextInt(10, 1000),
                 "user1@emaildomain.dom",
                 "79207865401");
 
         createRecord("user2",
                 "31.07.1985",
                 "password2",
-                BigDecimal.valueOf(random.nextInt(10, 1000)),
+                random.nextInt(10, 1000),
                 "user2@emaildomain.dom",
                 "79207865402");
 
         createRecord("user3",
                 "12.11.1999",
                 "password3",
-                BigDecimal.valueOf(random.nextInt(10, 1000)),
+                random.nextInt(10, 1000),
                 "user3@emaildomain.dom",
                 "79207865403");
 
         createRecord("user4",
                 "04.10.1997",
                 "password4",
-                BigDecimal.valueOf(random.nextInt(10, 1000)),
+                random.nextInt(10, 1000),
                 "user4@emaildomain.dom",
                 "79207865404");
 
         createRecord("user5",
                 "04.10.1981",
                 "password5",
-                BigDecimal.valueOf(random.nextInt(10, 1000)),
+                random.nextInt(10, 1000),
                 "user5@emaildomain.dom",
                 "79207865405");
 
         createRecord("user6",
                 "06.09.1982",
                 "password6",
-                BigDecimal.valueOf(random.nextInt(10, 1000)),
+                random.nextInt(10, 1000),
                 "user6@emaildomain.dom",
                 "79207865406");
     }

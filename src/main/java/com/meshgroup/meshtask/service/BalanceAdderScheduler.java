@@ -16,14 +16,14 @@ import java.util.concurrent.TimeUnit;
 public class BalanceAdderScheduler {
     private final AccountRepository accountRepository;
 
-    ConcurrentHashMap<Long, BigDecimal> oAcc = new ConcurrentHashMap<>();
+    ConcurrentHashMap<Long, Double> oAcc = new ConcurrentHashMap<>();
     @Scheduled(initialDelay = 10, fixedRate = 30, timeUnit = TimeUnit.SECONDS)
     public void scheduledAddEvery30Sec() {
         accountRepository.findAll().forEach((accountDao) -> {
-            double maxBalance = oAcc.get(accountDao.getId()).doubleValue() / 100 * 207;
-            double balanceAdded10perc = accountDao.getBalance().doubleValue() * 0.1 + accountDao.getBalance().doubleValue();
+            double maxBalance = oAcc.get(accountDao.getId()) / 100 * 207;
+            double balanceAdded10perc = accountDao.getBalance() * 0.1 + accountDao.getBalance();
             if  (balanceAdded10perc < maxBalance ) {
-                accountDao.setBalance(BigDecimal.valueOf(balanceAdded10perc));
+                accountDao.setBalance(balanceAdded10perc);
                 accountRepository.save(accountDao);
             }
         });
