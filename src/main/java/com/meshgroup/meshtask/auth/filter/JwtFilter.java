@@ -21,9 +21,7 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends GenericFilterBean {
-
     private static final String AUTHORIZATION = "Authorization";
-
     private final AuthService authService;
 
     private String getTokenFromRequest(HttpServletRequest request) {

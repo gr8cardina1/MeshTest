@@ -6,11 +6,7 @@ import com.meshgroup.meshtask.model.dao.AccountDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.NoSuchElementException;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static com.meshgroup.meshtask.exception.messages.ValidationExceptionMessages.EV_BalanceLessThanZero;
 import static com.meshgroup.meshtask.exception.messages.ValidationExceptionMessages.EV_TargetAccountDoesNotExist;
