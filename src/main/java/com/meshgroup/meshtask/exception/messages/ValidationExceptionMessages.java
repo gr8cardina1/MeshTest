@@ -4,4 +4,7 @@ public class ValidationExceptionMessages {
     public final static String EV_BalanceLessThanZero = "Balance cannot be 0 or less than 0";
     public final static String EV_AmountIsTooBig = "Amount is too big to subtract";
     public final static String EV_TargetAccountDoesNotExist = "Target account do not exist";
+
+    public final static String EV_NotLessThanOneRecord="Cannot delete phone because in DB should be 1 record at least";
+
 }

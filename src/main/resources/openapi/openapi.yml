@@ -23,6 +23,40 @@ paths:
         '200':
           $ref: '#/components/responses/UserTokenResponse'
 
+  /user/addphone:
+    post:
+      tags:
+        - User
+      operationId: userAddPhone
+      requestBody:
+        $ref: '#/components/requestBodies/UserAddPhoneRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserAddPhoneResponse'
+
+  /user/changephone:
+    post:
+      tags:
+        - User
+      operationId: userChangePhone
+      requestBody:
+        $ref: '#/components/requestBodies/UserChangePhoneRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserChangePhoneResponse'
+
+  /user/delete/{id}:
+    delete:
+      operationId: userDeletePhone
+      tags:
+        - User
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: OK
+
+
   /account/addbalance:
     post:
       tags:
@@ -48,6 +82,18 @@ paths:
 
 components:
   requestBodies:
+    UserChangePhoneRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserChangePhoneRequestSchema'
+    UserAddPhoneRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserAddPhoneRequestSchema'
     AccountTransferRequest:
       required: true
       content:
@@ -69,6 +115,18 @@ components:
 
 
   responses:
+    UserChangePhoneResponse:
+      description: Response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserChangePhoneResponseSchema'
+    UserAddPhoneResponse:
+      description: Response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserAddPhoneResponseSchema'
     AccountTransferResponse:
       description: Response
       content:
@@ -90,6 +148,57 @@ components:
 
 
   schemas:
+    UserChangePhoneRequestSchema:
+      type: object
+      required:
+        - id
+        - phone
+      properties:
+        id:
+          type: integer
+          format: int64
+        phone:
+          type: string
+    UserChangePhoneResponseSchema:
+      type: object
+      required:
+        - id
+        - userId
+        - phone
+      properties:
+        id:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+        phone:
+          type: string
+
+    UserAddPhoneRequestSchema:
+      type: object
+      required:
+        - phone
+      properties:
+        phone:
+          type: string
+    UserAddPhoneResponseSchema:
+      type: object
+      required:
+        - id
+        - userId
+        - phone
+      properties:
+        id:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+        phone:
+          type: string
+
+
     AccountAddBalanceRequestSchema:
       type: object
       required:
@@ -161,4 +270,27 @@ components:
       properties:
         token:
           type: string
+
+  parameters:
+    id:
+      in: path
+      required: true
+      name: id
+      schema:
+        type: integer
+        format: int64
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

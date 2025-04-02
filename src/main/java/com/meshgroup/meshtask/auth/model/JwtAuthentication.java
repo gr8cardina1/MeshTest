@@ -54,5 +54,9 @@ public class JwtAuthentication implements Authentication {
         return firstName;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
 
 }

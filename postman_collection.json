@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "f291e18d-61da-4305-94f2-819beb7b5569",
+		"name": "Mesh Test Task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39996291"
+	},
+	"item": [
+		{
+			"name": "generate_jwt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/user/generate_jwt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"user",
+						"generate_jwt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addBalance",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjMsImlhdCI6MTc0MzU4MTExNywiZXhwIjoxNzc1MTM4MDY5fQ.z4Ql4Iz3P1j-IiN8SzqjmsQqQC2-Djyb4yqL0-hUYx1dJhIqMfnBOFbMgofraSN-ysIoVFFcBwWF9dc3LD9Vjg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 2,\n    \"balance\" : 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/account/addbalance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"account",
+						"addbalance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transferAmount",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjMsImlhdCI6MTc0MzU4MTExNywiZXhwIjoxNzc1MTM4MDY5fQ.z4Ql4Iz3P1j-IiN8SzqjmsQqQC2-Djyb4yqL0-hUYx1dJhIqMfnBOFbMgofraSN-ysIoVFFcBwWF9dc3LD9Vjg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"srcId\": 2,\n    \"dstId\": 3,\n    \"amount\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/account/transfer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"account",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjMsImlhdCI6MTc0MzU4MTExNywiZXhwIjoxNzc1MTM4MDY5fQ.z4Ql4Iz3P1j-IiN8SzqjmsQqQC2-Djyb4yqL0-hUYx1dJhIqMfnBOFbMgofraSN-ysIoVFFcBwWF9dc3LD9Vjg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phone\" : \"7903000000001\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/user/addphone",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"user",
+						"addphone"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletePhone",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjMsImlhdCI6MTc0MzU4MDYzMSwiZXhwIjoxNzc1MTM3NTgzfQ.kw2si6plQ8zJGH82uKaoQ5TBhNGd9KJIEnu8S0VE26qD1WUlD1qPIzf4NjtLlfy1UekJXdRuk9T_3bAMhuB8dg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/user/delete/603",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"user",
+						"delete",
+						"603"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "changePhone",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjMsImlhdCI6MTc0MzU4MTExNywiZXhwIjoxNzc1MTM4MDY5fQ.z4Ql4Iz3P1j-IiN8SzqjmsQqQC2-Djyb4yqL0-hUYx1dJhIqMfnBOFbMgofraSN-ysIoVFFcBwWF9dc3LD9Vjg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 652,\n    \"phone\": \"7703000000000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/user/changephone",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"user",
+						"changephone"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

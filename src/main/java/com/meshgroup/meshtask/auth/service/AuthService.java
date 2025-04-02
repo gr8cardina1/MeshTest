@@ -7,6 +7,9 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 
 @Slf4j
 @Component
@@ -38,7 +41,18 @@ public final class AuthService {
                 .getBody();
     }
 
+    public Long getClaimUserId() {
+        JwtAuthentication jwtAuthentication = getAuthentication();
+        return jwtAuthentication.getUserId();
+    }
+
     public JwtAuthentication getAuthentication() {
         return (JwtAuthentication) SecurityContextHolder.getContext().getAuthentication();
+    }
+
+
+
+    public static String getBearerTokenHeader() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getHeader("Authorization");
     }
 }

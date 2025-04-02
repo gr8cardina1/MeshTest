@@ -1,6 +1,8 @@
 package com.meshgroup.meshtask.logic;
 
 import com.meshgroup.meshtask.dao.adapter.PhoneDataDaoAdapter;
+import com.meshgroup.meshtask.model.UserAddPhoneResponseSchema;
+import com.meshgroup.meshtask.model.UserChangePhoneResponseSchema;
 import com.meshgroup.meshtask.model.dao.PhoneDataDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,16 +14,18 @@ import org.springframework.stereotype.Service;
 public class PhoneOperations {
     private final PhoneDataDaoAdapter phoneDataDaoAdapter;
 
-    public void deleteByNumberAndUserId(String phoneNumber, Long userId) {
-        phoneDataDaoAdapter.deletePhone(phoneNumber, userId);
+    public void deleteByPhoneId(Long id, Long userId) {
+        phoneDataDaoAdapter.deletePhoneById(id,userId); // fix from claim
     }
 
-    public PhoneDataDao changePhone(String phoneNumber, String newPhoneNumber, Long userId) {
-        return phoneDataDaoAdapter.changePhone(phoneNumber, newPhoneNumber, userId);
+    public UserChangePhoneResponseSchema changePhone(Long id, String newPhoneNumber, Long userId) {
+        PhoneDataDao pDD = phoneDataDaoAdapter.changePhone(id, newPhoneNumber, userId);
+        return new UserChangePhoneResponseSchema(pDD.getId(), pDD.getUserId(), pDD.getPhone());
     }
 
-    public PhoneDataDao addPhone(String phoneNumber, Long userId) {
-        return phoneDataDaoAdapter.addPhone( phoneNumber,  userId);
+    public UserAddPhoneResponseSchema addPhone(String phoneNumber, Long userId) {
+        PhoneDataDao pDD = phoneDataDaoAdapter.addPhone( phoneNumber,  userId);
+        return new UserAddPhoneResponseSchema(pDD.getId(), pDD.getUserId(), pDD.getPhone());
     }
 
 
